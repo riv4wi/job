@@ -1,0 +1,5 @@
+1. Crear las tablas necesarias para modelar la experiencia laboral
+2. modelar la experiencia laboral en php
+3. Buscar algun plugin para capturar fechas compatible con bootstrap
+4. Pais, que sea una busqueda con ajax tipo google
+

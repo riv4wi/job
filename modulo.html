@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        var Module = (function () {
+            var modules = {};
+
+            return {
+                create: function (name, credit) {
+                    if (modules[name] === undefined) {
+                        modules[name] = {};
+                    }
+
+                    modules[name].credit = function () {
+                        return credit;
+                    }
+                },
+
+                append: function (name, module) {
+                    if (modules[name] === undefined) {
+                        throw 'Module not exists';
+                    }
+
+                    for (var k in module) {
+                        modules[name][k] = module[k];
+                    }
+                },
+
+                get: function (name) {
+                    if (modules[name] === undefined) {
+                        throw 'Module not exists';
+                    }
+
+                    return modules[name];
+                }
+            }
+        })();
+
+        /* ¿Cómo registrar un módulo?
+        En este ejemplo he creado 2 módulos y cada vez que creamos un módulo se creará un método adicional
+        para obtener los créditos del módulo. */
+        Module.create('DatosPersonales', {
+            name: 'DatosPersonales',
+            description: 'Módulo que maneja la seccion de datos personales',
+            version: '1.0'
+        });
+
+        Module.create('ExperienciaLaboral', {
+            name: 'ExperienciaLaboral',
+            description: 'Módulo que manjeja la seccion de experiencia laboral',
+            version: '1.0'
+        });
+
+        /* Agregando comportamiento a los módulos */
+        Module.append('DatosPersonales', {
+            dni: '',
+            nombres: '',
+            apellidos: '',
+            sexo: '',
+            edoCivil: '',
+            telefono: '',
+            idPais: '',
+            provincia: '',
+            ciudad: '',
+            calle: '',
+
+            capturar: function() {
+                // tomar los valores que ingreso el usuario en esta seccion
+            },
+
+            mostrar: function(){
+                // muestra los datos en los campos del formulario
+            }
+        });
+
+
+        Module.append('ExperienciaLaboral', {
+            empresa: '',
+            puesto: '',
+            nivel: '',
+            area: '',
+            personasAcargo: '',
+            idPais: '',
+            desde: '',
+            hasta: '',
+            tiempo: '',
+
+
+            capturar: function() {
+                // tomar los valores que ingreso el usuario en esta seccion
+            },
+
+            mostrar: function(){
+            }
+        });
+
+
+        /* Obteniendo el módulo venta */
+        var venta = Module.get('venta');
+        console.log('venta.calcularMontoSinIva(1000)', venta.calcularMontoSinIva(1000)); // 847.4576271186442
+
+        /* Obtener crédito */
+        console.log('venta.credit()', venta.credit());
+
+    </script>
+
+
+    <script type="text/javascript">
+        var modulo = (function () {
+            var version = 'Vr 1.0';
+
+            var persona = {
+                nombres: "Albany Rivas",
+                edad: 10,
+                fecha_nacimiento: "13/03/2007",
+
+                mostrarEdad: function () {
+                    return this.edad;
+                }
+            };
+
+            /* simple método privado */
+            var metodoPrivado = function () {
+               console.log('Soy un metodo privado');
+               console.log(persona.nombres, 'tiene', persona.mostrarEdad(), 'años');
+            };
+
+            /* retornando un objeto literal */
+           return {
+               version : version,
+
+               metodoPublico : function () {
+                   metodoPrivado();
+                   console.log('Soy un metodo publico');
+               }
+           }
+        })();
+
+        /* accediendo nuestro método publico */
+        modulo.metodoPublico();
+        console.log(modulo.version);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
