@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS personas, paises;
+DROP TABLE IF EXISTS personas, paises, perfiles, experienciasexperiencias;
 
 CREATE TABLE `paises` (
   `idPais` varchar(2) NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE `paises` (
 
 
 CREATE TABLE `personas` (
-  `idPersona` int (10) NOT NULL AUTO_INCREMENT ,
+  `idPersona` int (10) NOT NULL AUTO_INCREMENT,
   `dni` varchar(20) NOT NULL,
   `nombres` varchar(200) NOT NULL,
   `apellidos` varchar(200) NOT NULL,
@@ -26,6 +26,33 @@ CREATE TABLE `personas` (
 	ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+CREATE TABLE `perfiles` (
+  `idPerfil` int (10) NOT NULL AUTO_INCREMENT,
+  `idPersona` int (10) NOT NULL,
+  `actualizacion` DATE,
+  PRIMARY KEY (`idPerfil`),
+  INDEX (`idPersona`),
+  FOREIGN KEY (`idPersona`) 
+    REFERENCES personas(`idPersona`)  
+	ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `experiencias` (
+  `idPerfil` int (10),
+  `puesto` varchar(200) NOT NULL,
+  `nivel` varchar(200) NOT NULL,
+  `area` varchar(200) NOT NULL,
+  `personasAcargo` int,
+  `desde` DATE,
+  `hasta` DATE,
+  `tiempo` float,
+  INDEX (`idPerfil`),
+  FOREIGN KEY (`idPerfil`) 
+    REFERENCES perfiles(`idPerfil`)  
+	ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `paises` VALUES('AF', 'Afganistán');
 INSERT INTO `paises` VALUES('AX', 'Islas Gland');
