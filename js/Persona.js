@@ -75,9 +75,8 @@ class Persona {
          */
         $(document).find('input').on('change',function () {
 
-            let attr = $(this).attr('name');
+            self.attributes[$(this).attr('name')] = $(this).val();
 
-            self.attributes[attr] = $(this).val();
             self.show();
         });
 
