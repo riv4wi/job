@@ -9,7 +9,6 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="js/jquery-3.3.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/ba.js"></script>
 	<body>
 			<section class="formSection pb-50 pt-50">
 				<div class="formBackground">
@@ -36,7 +35,7 @@
 												<input type="text" class="formStyle" name="nombre" placeholder="Nombre"  required>
 											</div>
 											<div class="col-md-4 col-sm-4 col-xs-4 marginInputForm">
-												<input type="text" class="formStyle" name="apellido" placeholder="Apellido"  required>
+												<input type="text" class="formStyle" name="apellidos" placeholder="Apellidos"  required>
 											</div>
 											<div class="col-md-4 col-sm-4 col-xs-4 marginInputForm">
 												Sexo:
@@ -61,7 +60,7 @@
 									<div class="container">
 										<div class="row">
 											<div class="col-md-3 col-sm-3 col-xs-3 marginInputForm">
-												<input type="text" class="formStyle" name="pais"placeholder="Pais"  required>
+												<input type="text" class="formStyle listener_pais" name="pais"placeholder="Pais"  required>
 											</div>
 											<div class="col-md-3 col-sm-3 col-xs-3 marginInputForm">
 												<input type="text" class="formStyle" name="provincia" placeholder="Provincia" aria-describedby="inputGroupPrepend2" required>
@@ -176,3 +175,11 @@
 			</section>
 
 		</body>
+
+<script type="application/javascript" src="js/Persona.js">
+
+</script>
+
+<script>
+    new Persona();
+</script>
