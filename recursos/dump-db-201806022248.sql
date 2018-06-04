@@ -104,6 +104,7 @@ CREATE TABLE `personas` (
   `provincia` varchar(45) DEFAULT NULL,
   `ciudad` varchar(45) DEFAULT NULL,
   `calle` varchar(150) DEFAULT NULL,
+  UNIQUE (`dni`), 
   PRIMARY KEY (`idPersona`),
   KEY `idPais` (`idPais`),
   CONSTRAINT `personas_ibfk_1` FOREIGN KEY (`idPais`) REFERENCES `paises` (`idPais`) ON UPDATE CASCADE
