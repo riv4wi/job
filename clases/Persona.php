@@ -4,7 +4,6 @@ require_once 'Perfil.php';
 
 class Persona
 {
-
     private $idPersona;
     private $dni;
     private $nombres;
@@ -19,7 +18,20 @@ class Persona
 
     const TABLA = 'personas';
 
-
+    /**
+     * Constructor de la clase Persona
+     * @param   string  $dni
+     * @param   string  $nombres
+     * @param   string  $sexo
+     * @param   string  $apellidos
+     * @param   string  $edoCivil
+     * @param   string  $telefono
+     * @param   string  $idPais
+     * @param   string  $provincia
+     * @param   string  $ciudad
+     * @param   string  $calle
+     * @param   integer  $idPersona
+     */
     public function __construct($dni, $nombres, $apellidos, $sexo, $edoCivil, $telefono, $idPais, $provincia, $ciudad, $calle, $idPersona = null)
     {
         $this->idPersona = $idPersona;
@@ -35,7 +47,10 @@ class Persona
         $this->calle = $calle;
     }
 
-
+    /**
+     * Guarda por inserción o actualización una entidad persona
+     *
+     */
     public function save()
     {
         $conexion = new Conexion();
@@ -56,7 +71,9 @@ class Persona
             $consulta->bindParam(':calle', $this->calle);
             $consulta->bindParam(':idPersona', $this->idPersona);
             $consulta->execute();
-        } else /*Inserta*/ {
+        }
+        else /*Inserta*/
+        {
             $consulta = $conexion->prepare(
                 'INSERT INTO ' . self::TABLA . ' 
 				(dni, nombres, apellidos, sexo, edoCivil, telefono, idPais, provincia, ciudad, calle) 
@@ -76,11 +93,16 @@ class Persona
             $consulta->execute();
             $this->idPersona = $conexion->lastInsertId();
             $perfil = new Perfil($this->idPersona);
+            // @todo mejorar con manejo de excepciones, si no se pudo guardar el perfil disparar una excepcion
         }
         $conexion = null;
     }
 
-
+    /**
+     * Devuelve los datos de una persona a través del identificador
+     *
+     * @param   integer  $idPersona
+     */
     public static function buscarPorId($idPersona)
     {
         $conexion = new Conexion();
@@ -107,12 +129,14 @@ class Persona
         }
     }
 
+    /**
+     * Getters and Setters
+     */
 
     public function getIdPersona()
     {
         return $this->idPersona;
     }
-
 
     public function getNombres()
     {
@@ -124,7 +148,6 @@ class Persona
         $this->nombres = $nombres;
     }
 
-
     public function getApellidos()
     {
         return $this->apellidos;
@@ -134,7 +157,6 @@ class Persona
     {
         $this->nombres = $nombres;
     }
-
 
     public function getSexo()
     {
@@ -146,7 +168,6 @@ class Persona
         $this->sexo = $sexo;
     }
 
-
     public function getEdoCivil()
     {
         return $this->edoCivil;
@@ -156,7 +177,6 @@ class Persona
     {
         $this->edoCivil = $edoCivil;
     }
-
 
     public function getTelefono()
     {
@@ -168,7 +188,6 @@ class Persona
         $this->telefono = $telefono;
     }
 
-
     public function getIdPais()
     {
         return $this->idPais;
@@ -178,7 +197,6 @@ class Persona
     {
         $this->idPais = $idPais;
     }
-
 
     public function getProvincia()
     {
@@ -190,7 +208,6 @@ class Persona
         $this->provincia = $provincia;
     }
 
-
     public function getCiudad()
     {
         return $this->ciudad;
@@ -200,7 +217,6 @@ class Persona
     {
         $this->ciudad = $ciudad;
     }
-
 
     public function getCalle()
     {
