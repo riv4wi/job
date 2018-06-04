@@ -3,13 +3,16 @@ require_once 'Conexion.php';
 
 class Perfil
 {
-
-    private $idPerfil;
-    private $idPersona;
-    private $actualizacion;
+    private $idPerfil; /* Identificador del perfil asociado a una persona */
+    private $idPersona; /* Identificador de la persona a quien pertenece el perfil */
+    private $actualizacion; /* Fecha de la ultima actualización del perfil */
 
     const TABLA = 'perfiles';
 
+    /**
+     * Constructor de la clase Perfil
+     * @param   integer  $idPersona
+     */
     public function __construct($idPersona)
     {
         $this->idPersona = $idPersona;
@@ -18,6 +21,10 @@ class Perfil
         $this->save();
     }
 
+    /**
+     * Guarda por inserción o actualización un perfil
+     *
+     */
     public function save()
     {
         $conexion = new Conexion();
@@ -43,7 +50,11 @@ class Perfil
         $conexion = null;
     }
 
-    public function buscarIdPerfilXIdPersona($idPerfil)
+    /**
+     * Busca el perfil perteneciente a una persona por medio de su identificador (IdPersona)
+     * @param   integer  $idPersona
+     */
+    public function buscarIdPerfilXIdPersona($idPersona)
     {
         $conexion = new Conexion();
         $consulta = $conexion->prepare('SELECT idPerfil FROM ' . self::TABLA . ' WHERE idPersona = :idPersona');
@@ -57,11 +68,15 @@ class Perfil
         }
     }
 
+
+    /**
+     * Getters and Setters
+     */
+
     public function getIdPerfil()
     {
         return $this->idPerfil;
     }
-
 
     public function getActualizacion()
     {
@@ -84,5 +99,4 @@ class Perfil
     }
 
 }
-
 ?>
