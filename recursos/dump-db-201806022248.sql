@@ -24,13 +24,15 @@ DROP TABLE IF EXISTS `experiencias`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `experiencias` (
   `idPerfil` int(10) DEFAULT NULL,
+  `idExperiencia` int(10) NOT NULL AUTO_INCREMENT,
   `puesto` varchar(200) NOT NULL,
   `nivel` varchar(200) NOT NULL,
   `area` varchar(200) NOT NULL,
   `personasAcargo` int(11) DEFAULT NULL,
   `desde` date DEFAULT NULL,
   `hasta` date DEFAULT NULL,
-  `tiempo` float DEFAULT NULL,
+  `tiempo` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idExperiencia`),
   KEY `idPerfil` (`idPerfil`),
   CONSTRAINT `experiencias_ibfk_1` FOREIGN KEY (`idPerfil`) REFERENCES `perfiles` (`idPerfil`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
